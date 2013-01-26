@@ -13,6 +13,7 @@ PROTO_SWITCH = {
 class Pivotal(object):
 
     def __init__(self, token, use_https=True):
+        self.base_url = BASE_URL
         self.token = token
         self.path = []
         self.qs = {}
@@ -40,7 +41,7 @@ class Pivotal(object):
 
     @property
     def url(self):
-        url = PROTO_SWITCH[self.use_https] + BASE_URL + '/'.join(map(str, self.path))
+        url = PROTO_SWITCH[self.use_https] + self.base_url + '/'.join(map(str, self.path))
         if self.qs:
             url += '?' + urlencode(self.qs)
         return url
